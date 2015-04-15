@@ -1,11 +1,21 @@
-var main = require('./src/main');
+var	fs = require('fs'),
+	main = require('./src/main');
 
 if (process.argv.length < 3) {
     printUsage();
-    return;
+    process.exit(1);
 }
 
-main(process.argv[2]);
+var outputPath = process.argv[2];
+if (!fs.exists(outputPath)) {
+	printUsage();
+	console.log('');
+	console.log('Error: Output folder "' + outputPath + '" does not exist.');
+
+	process.exit(1);
+}
+
+main(outputPath);
 
 function printUsage() {
     console.log('');
