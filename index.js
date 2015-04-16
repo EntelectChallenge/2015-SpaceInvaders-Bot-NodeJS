@@ -7,15 +7,17 @@ if (process.argv.length < 3) {
 }
 
 var outputPath = process.argv[2];
-if (!fs.exists(outputPath)) {
-	printUsage();
-	console.log('');
-	console.log('Error: Output folder "' + outputPath + '" does not exist.');
+fs.stat(outputPath, function(err, stat) {
+    if(err == null) {
+        main(outputPath);
+    } else {
+        printUsage();
+        console.log('');
+        console.log('Error: Output folder "' + outputPath + '" does not exist.');
 
-	process.exit(1);
-}
-
-main(outputPath);
+        process.exit(1);    
+    }
+});
 
 function printUsage() {
     console.log('');
