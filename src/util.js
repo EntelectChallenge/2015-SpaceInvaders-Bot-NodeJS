@@ -20,8 +20,8 @@ module.exports = {
 
         fs.writeFile(filename, move + '\r\n', function(err) {
             if (err) {
-                logStdErr('Failed to write ' + outputFile + '!');
-                logStdErr(ex.stack);
+                logStdErr('Failed to write ' + filename + '!');
+                logStdErr(err.stack);
                 return;
             }
 
